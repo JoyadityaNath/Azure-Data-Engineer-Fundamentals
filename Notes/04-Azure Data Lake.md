@@ -27,10 +27,17 @@ when these blobs are stored in a heirarchical manner then it is called a Data La
 
 
 
-![Uploading image.png…]()
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d16841d8-e9ab-430a-9a05-2a677ad5284e" />
 
 
-While creating a storage account in Azure resource group, ensure this option is ticked. Hierarchical namespace ensures that a data lake is being created.
 
+
+While creating a storage account in Azure resource group, ensure this option is ticked. Hierarchical namespace ensures that a data lake is being created. Else it 
+is just a blob storage.
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0d155819-8d67-4e0f-92cd-f6931f2bec7d" />
+
+In the left panel, in data storga we can see 4 types of storages. Containers(Store files and large binary data at scale. Data Lakes), File(Cloud network drives for shared file access. Also mounts local files), Queues(Message-based communication between components) and Tables(Fast NoSQL key-value storage for structured/semi-structured data).
 
 
