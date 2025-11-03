@@ -27,7 +27,7 @@ when these blobs are stored in a heirarchical manner then it is called a Data La
 
 
 
-Rsource Group Hierarchy
+Reource Group Hierarchy
 
 Azure resource groups: A resource group is a container that holds related resources for an Azure solution. The resource group can include all the resources for the
 solution or only those resources that you want to manage as a group. You decide how to allocate resources to resource groups based on what makes the most sense 
