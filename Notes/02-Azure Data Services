@@ -1,0 +1,38 @@
+1. Azure SQL Database- Azure SQL Database is a relational database (RDBMS) service provided by Microsoft Azure that is widely used by developers when creating 
+new applications in the cloud. It is managed completely by Microsoft and is a highly scalable platform-as-a-service (PaaS) designed especially for cloud applications. 
+Here, we create a managed database server in the cloud and use the server to deploy our database. The server is a logical construct that acts as the central 
+administration point for pooled databases or multiple logins, auditing rules, threat detection policy, and failover groups. This is basically MS SQL Server hosted on 
+cloud as a PAAS.
+
+
+2. Data Lake- A data lake is a centralized repository designed to store vast amounts of raw data in its native format, structured, semi-structured, or unstructured, 
+until it's needed for analysis. Unlike traditional databases or data warehouses, data lakes offer flexibility and scale, enabling real-time analytics, machine learning,
+and large-scale data processing.
+Key characteristics of data lakes include:
+
+-Storage of raw data in its native format
+-Support for diverse data types without time-consuming preparation
+-Enabling advanced analytics and machine learning
+-Real-time data processing capabilities
+-Cost-effective storage for large data volumes
+
+
+3. Azure CosmosDB: zure Cosmos DB is a fully managed NoSQL database on Microsoft Azure, built for high availability, low latency, and global scalability. It supports 
+multiple data models, including document, key-value, graph, and column-family, making it flexible for diverse applications.
+
+
+4. Azure Events Streams: Event Hubs is a fully managed, real-time data ingestion service that’s simple, trusted, and scalable. Stream millions of events per second
+from any source to build dynamic data pipelines and immediately respond to business challenges. Keep processing data during emergencies using the geo-disaster
+recovery and geo-replication features. Queue type storage, publisher and subscriber model. Alternative to Apache Kafka.
+
+
+5. Azure Data Factory: Microsoft's Orchestration tool. Equivalent to Apache Airflow but provides more resources. An ETL Product.
+
+
+6. Azure Synapse Analytics: Azure Synapse is an enterprise analytics service that accelerates time to insight across data warehouses and big data systems. Azure 
+Synapse brings together the best of SQL technologies used in enterprise data warehousing, Spark technologies used for big data, Data Explorer for log and time 
+series analytics, Pipelines for data integration and ETL/ELT, and deep integration with other Azure services such as Power BI, CosmosDB, and AzureML.
+
+
+7. Azure Stream Analytics: Azure Stream Analytics is a real-time and complex event-processing engine designed for analyzing and processing high volumes of fast
+streaming data from multiple sources simultaneously. Azure Stream Analytics is available on Azure IoT Edge runtime, enabling to process data on IoT devices.
