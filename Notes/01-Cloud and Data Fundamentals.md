@@ -8,3 +8,9 @@ the scenes. Although PaaS has some similarities with serverless computing, there
 
 
 SAAS(Software as a Service): Software as a service is a cloud computing service model in which a provider delivers application software to clients while managing the required physical and software resources.
+
+
+Batch Processing: In computing, batch processing is the running of a software job in an automated and unattended way. A user schedules a job to run and then waits for a processing system to run it. Typically, a job is scheduled to run at a configured time of day or when an event occurs or when computer resources are available.
+
+
+Stream Processing:  It is used to query continuous data stream and detect conditions, quickly, within a small time period from the time of receiving the data. The detection time period varies from few milliseconds to minutes.
