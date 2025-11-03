@@ -27,3 +27,10 @@ when these blobs are stored in a heirarchical manner then it is called a Data La
 
 
 
+![Uploading image.png…]()
+
+
+While creating a storage account in Azure resource group, ensure this option is ticked. Hierarchical namespace ensures that a data lake is being created.
+
+
+
