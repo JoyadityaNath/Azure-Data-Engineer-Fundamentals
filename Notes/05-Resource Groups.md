@@ -63,5 +63,4 @@ Cost visibility becomes diluted and difficult to align to business ownership.
 
 How to make a new resource inside a resource group:
 1. Enter a resource group and just create a new resource for example: a storage account.
-Deleting or updating workloads becomes error-prone, as components must be located and managed individually.
-Governance becomes inconsistent, encouraging configuration drift and complicating compliance.
+
