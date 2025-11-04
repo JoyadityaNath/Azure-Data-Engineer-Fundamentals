@@ -162,4 +162,94 @@ Go to your resource group's data lake and then verify if the data has been inges
 
 
 
+Moving the raw data from the current folder to Enriched folder:
+1. Creating a New Data Flow
+Navigate to the Develop hub.
+Click the “+” (Add new) button.
+Select Data flow from the dropdown.
+This creates a new pipeline component that visually designs transformations on ingested datasets — similar to ETL (Extract, Transform, Load) processes.
+
+⚙️ 2. Adding the Data Source
+In the Data Flow canvas, click “Add Source.”
+Configure the Source settings:
+Output stream name: RawData
+Description: “Import data from GithubToParquet”
+Source type: Integration dataset
+Dataset: Select the relevant linked dataset (GithubToParquet).
+Ensure Allow schema drift is checked (to handle schema variations dynamically).
+
+Note: The warning “The provided file extension does not match the dataset format” indicates a mismatch between file type and declared dataset format (e.g., .csv vs. .parquet). This should be corrected to avoid runtime errors.
+
+🧱 3. Reviewing Schema Projection
+Move to the Projection tab to inspect the dataset schema. Import projections to the raw data to make it available for the subsequent cleaning steps.
+Columns include:
+Item_Identifier, Item_Weight, Item_Fat_Content, Item_Visibility,
+Item_Type, Item_MRP, Outlet_Identifier, Outlet_Establishment_Year
+All are typed as string.
+
+You can import projection or overwrite schema as needed to align metadata definitions.
+
+🧮 4. Adding a Derived Column Transformation
+Add a new transformation: Derived Column.
+This creates a new computed or updated column in your data stream.
+Configure:
+Output stream name: ReplaceNulls
+Incoming stream: RawData
+Description: “Creating/updating the columns Item_Identifier, Item_Weight, etc.”
+Example Expression for Replacing Nulls:
+
+iif(isNull(Outlet_Size), 'N/A', Outlet_Size)
+
+
+This replaces null or missing values in the Outlet_Size column with "N/A".
+Derived Columns are pivotal for applying logic-driven updates, such as mathematical calculations, string transformations, or data enrichment.
+
+🔧 5. Transformation Categories (Actions in Data Flow)
+Azure Synapse Data Flows provide modular transformations categorized as follows:
+
+🔹 Schema Modifiers
+
+Derived Column – Create or modify columns using expressions.
+Select – Rename, reorder, or remove columns.
+Aggregate – Perform group-based calculations (e.g., SUM, AVG).
+Surrogate Key – Generate unique row identifiers.
+Pivot / Unpivot – Reshape data between wide and tall formats.
+Window – Create window functions for ranking or moving averages.
+
+🔹 Row Modifiers
+
+Filter – Apply conditional row filtering.
+Sort – Reorder rows based on column values.
+Alter Row – Flag rows for insert, update, or delete operations.
+Assert – Enforce data quality checks or business rules.
+
+🔹 Multiple Inputs/Outputs
+
+Join – Combine datasets based on keys (inner, outer, left, right).
+Conditional Split – Route data to multiple paths based on conditions.
+Union – Merge multiple streams into one.
+Lookup – Match and enrich data from another source.
+Exists – Check for existence of records between datasets.
+
+🔹 Formatters
+
+Flatten – Expand hierarchical data like JSON or XML.
+Parse / Stringify – Convert between string and structured data types.
+
+🔹 Destinations (Sink)
+
+Sink – Define the final destination for transformed data, e.g., a Parquet file in Azure Data Lake or a SQL table in Synapse.
+
+📤 6. Validating and Publishing
+
+Use Validate all to check syntax and configuration consistency.
+Once validated, click Publish all to save changes to the Synapse workspace.
+
+
+
+Then add a data flow in the pipeline, go back to the integrate tab to our prevoius pipeline and add the data flow to the pipeline.
+
+
+
+
 
