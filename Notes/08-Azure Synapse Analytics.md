@@ -120,6 +120,7 @@ Select the Linked Service for your Data Lake.
 Specify the File Path where data will land.
 For example:
 raw / github / sales
+If the file path is not stated, it follows the relative path's folder structure pattern.
 Select Import Schema = None, since schema will derive from source and mapping.
 Click OK.
 
