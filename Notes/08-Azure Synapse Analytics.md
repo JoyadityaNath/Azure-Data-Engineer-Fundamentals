@@ -156,4 +156,9 @@ Stores it in high-performance Parquet format, enabling cost-efficient analytics 
 
 
 
+Go to your resource group's data lake and then verify if the data has been ingested or not.
+
+
+
+
 
