@@ -238,7 +238,10 @@ Parse / Stringify – Convert between string and structured data types.
 
 🔹 Destinations (Sink)
 
-Sink – Define the final destination for transformed data, e.g., a Parquet file in Azure Data Lake or a SQL table in Synapse.
+Sink – Define the final destination for transformed data, e.g.,A delta lake (Inline sink type).
+
+<img width="1177" height="585" alt="image" src="https://github.com/user-attachments/assets/0b0dfd54-1b14-40c4-bc08-7f485cea84c9" />
+
 
 📤 6. Validating and Publishing
 
