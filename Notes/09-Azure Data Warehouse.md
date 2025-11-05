@@ -36,3 +36,21 @@ When you create an external table in Azure Synapse Analytics, you’re essential
 The metadata tells Synapse where the external data lives, how it’s formatted, and what its structure looks like.
 
 
+
+
+A Database Scoped Credential is needed because it securely stores and manages authentication information that Synapse uses to access external data sources (like Azure Data Lake, Blob Storage, or external SQL servers).
+Without it, Synapse wouldn’t know who you are or how to authenticate when connecting to data that lives outside the database.
+That credential contains sensitive authentication information (like managed identity, SAS token, or storage key).
+To protect that sensitive data, SQL Server and Synapse require a Database Master Key (DMK).
+When you run that CREATE DATABASE SCOPED CREDENTIAL statement, Synapse needs to store authentication info securely inside your database’s metadata.
+To do this, it uses encryption — specifically, it encrypts the credential using your Database Master Key (DMK).
+
+
+
+<img width="1659" height="726" alt="image" src="https://github.com/user-attachments/assets/04c2bdea-17c1-4d62-b34c-df9746ae99d1" />
+
+<img width="652" height="69" alt="image" src="https://github.com/user-attachments/assets/99d3b466-4b39-4051-98a8-6a0c858c170e" />
+
+
+
+
