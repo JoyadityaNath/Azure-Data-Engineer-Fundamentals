@@ -67,5 +67,82 @@ END
 ````
 
 
+CREATING EXTERNAL RESOURCES  for our external table:
+
+````sql
+CREATE MASTER KEY ENCRYPTION BY PASSWORD ='Cr7@#007' 
+
+--create database scoped credential for the external table
+
+IF NOT EXISTS(SELECT * FROM sys.database_credentials WHERE name='sales_creds')
+BEGIN
+    CREATE DATABASE SCOPED CREDENTIAL sales_creds
+    WITH 
+        IDENTITY='Managed Identity'
+END
+
+--external data source
+IF NOT EXISTS(SELECT * FROM sys.external_data_sources WHERE name='gold_source')
+BEGIN
+    CREATE EXTERNAL DATA SOURCE gold_source
+    WITH
+    (
+        LOCATION='https://web.azuresynapse.net/en/authoring/explore/linked/storageaccounts/AzureDataLakeStorage1-azuredestorageforjoy%2Fenriched?subFolderPath=&workspace=%2Fsubscriptions%2Ff20dc50d-1591-4f5c-ade3-50a0bd2d226b%2FresourceGroups%2FTest-resource-group%2Fproviders%2FMicrosoft.Synapse%2Fworkspaces%2Fazuresynapsejoy'
+        CREDENTIAL=sales_creds
+    )
+END
+
+--external file format
+IF NOT EXISTS(SELECT * FROM sys.external_file_formats WHERE name="delta_format")
+BEGIN
+    CREATE EXTERNAL FILE FORMAT delta_format
+    WITH
+    (
+        FORMAT_TYPE=DELTA
+    )
+END
+````
+
+
+Explanation:
+
+1) Database Master Key (DMK)
+   What it is: A symmetric key inside your Synapse SQL database that protects other sensitive secrets (credentials, certificates).
+   Why you need it: When you store any secret (e.g., SAS token, storage key, or even the “use Managed Identity” instruction), SQL encrypts that metadata. The DMK     is the root of that encryption hierarchy.
+   Internal mechanics:
+   DMK is created and stored in your database, encrypted by the password you supplied.
+   Later objects (credentials) are encrypted by the DMK.
+   Without a DMK you’ll get the “create/open a master key” error when creating credentials.
+   TL;DR: The DMK is the vault that secures secrets for external access.
+
+2) Database-scoped Credential (DSC)
+   What it is: A secure handle to an identity your database will use when authenticating to external systems.
+   Why you need it: Synapse must prove who it is to your Data Lake. Using IDENTITY='Managed Identity' tells Synapse to use the workspace’s AAD Managed Identity       (no passwords, no keys).
+   Internal mechanics:
+
+    The DSC record is stored in sys.database_credentials and encrypted by the DMK.
+    At query time, Synapse obtains an OAuth token for the Synapse workspace’s managed identity and presents it to ADLS.
+    Access is permitted only if that managed identity has RBAC on the storage (e.g., Storage Blob Data Reader).
+    TL;DR: The DSC is your ID badge, locked in the DMK safe.
+
+3) External Data Source (EDS)
+   What it is: A pointer that tells Synapse where the external data lives and which credential to use to get there.
+   Why you need it: External tables and OPENROWSET reference an EDS to resolve storage endpoints consistently.
+   Internal mechanics:
+   The EDS stores the base URI and a reference to sales_creds.
+   At runtime, Synapse resolves gold_source → grabs the credential → gets a token → calls the storage endpoint.
+Important correction:
+The LOCATION must be a storage endpoint, not a Synapse Studio URL. Use ADLS Gen2 URI format:
+TL;DR: The EDS is the GPS coordinate + who to authenticate as.
+
+4) External File Format (EFF)
+   What it is: A reusable definition that tells Synapse how to interpret the files (Delta, Parquet, CSV, etc.).
+   Why you need it: External tables reference a file format so the engine knows the storage layout and reader to use.
+   Internal mechanics:
+
+    The EFF stores a small metadata record (FORMAT_TYPE, optional options like field/row terminators for CSV).
+    For Delta Lake, Synapse uses the Delta reader which reads the transaction log to find the current set of Parquet files.
+    TL;DR: The EFF is the decoder ring for your files.
+   
 
 
