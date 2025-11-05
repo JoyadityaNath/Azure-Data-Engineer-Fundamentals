@@ -53,4 +53,19 @@ To do this, it uses encryption — specifically, it encrypts the credential usin
 
 
 
+````sql
+CREATE MASTER KEY ENCRYPTION BY PASSWORD ='Cr7@#007' 
+
+--create database scoped credential for the external table
+
+IF NOT EXISTS(SELECT * FROM sys.database_credentials WHERE name='sales_creds')
+BEGIN
+    CREATE DATABASE SCOPED CREDENTIAL sales_creds
+    WITH 
+        IDENTITY='Managed Identity'
+END
+````
+
+
+
 
