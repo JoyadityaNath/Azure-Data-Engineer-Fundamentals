@@ -4,10 +4,11 @@ OPENROWSET in Azure Synapse allows serverless SQL pools to query external files 
 This is highly efficient for exploratory analytics, data validation, and integration pipelines where moving data would be costly or unnecessary.
 
 
-'''sql
+````sql
 SELECT *
 FROM OPENROWSET(
     BULK 'https://<storage-account>.dfs.core.windows.net/<container>/<path>/file.parquet',
     FORMAT = 'PARQUET'
 ) AS [result];
-'''
+````
+
