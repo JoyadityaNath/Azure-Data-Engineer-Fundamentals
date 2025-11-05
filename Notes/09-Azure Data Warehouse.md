@@ -143,6 +143,20 @@ TL;DR: The EDS is the GPS coordinate + who to authenticate as.
     The EFF stores a small metadata record (FORMAT_TYPE, optional options like field/row terminators for CSV).
     For Delta Lake, Synapse uses the Delta reader which reads the transaction log to find the current set of Parquet files.
     TL;DR: The EFF is the decoder ring for your files.
-   
+
+
+
+
+   Finally Creating our External table:
+
+   <img width="744" height="153" alt="image" src="https://github.com/user-attachments/assets/b98fb74a-8a32-41e4-8653-4826e539313d" />
+
+   <img width="629" height="436" alt="image" src="https://github.com/user-attachments/assets/da4b7f39-adb3-4732-8cb1-abaf0d72f853" />
+
+
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9a54cdb2-a938-4f8e-be14-d8f5625a466c" />
+
+
 
 
